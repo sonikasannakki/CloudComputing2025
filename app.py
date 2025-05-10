@@ -80,7 +80,7 @@ def get_revenue_data():
           DATE(sold_at) AS date,
           SUM(product_retail_price) AS daily_revenue
         FROM
-          `comm034-coursework-6879699.thelook.inventory_items`
+          `comm034-coursework-6897699.thelook.inventory_items`
         WHERE
           DATE(sold_at) BETWEEN '2022-01-01' AND '2022-01-30'
         GROUP BY date
