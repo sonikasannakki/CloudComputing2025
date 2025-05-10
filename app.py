@@ -76,14 +76,16 @@ def get_traffic_data():
 def get_revenue_data():
     thirty_days_ago = (datetime.datetime.utcnow() - datetime.timedelta(days=30)).date()
     query = f"""
-        SELECT
-          DATE(o.created_at) AS date,
-          ROUND(SUM(oi.sale_price), 2) AS daily_revenue
-        FROM `comm034-coursework-6897699.thelook.orders` o
-        JOIN `comm034-coursework-6897699.thelook.order_items` oi ON o.order_id = oi.order_id
-        WHERE o.status = 'Complete' AND o.created_at >= '{thirty_days_ago}'
+       SELECT
+          DATE(sold_at) AS date,
+          SUM(product_retail_price) AS daily_revenue
+        FROM
+          `comm034-coursework-6879699.thelook.inventory_items`
+        WHERE
+          DATE(sold_at) BETWEEN '2022-01-01' AND '2022-01-30'
         GROUP BY date
-        ORDER BY date
+        ORDER BY date;
+
     """
     return client.query(query).to_dataframe()
 
