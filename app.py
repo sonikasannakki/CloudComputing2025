@@ -64,9 +64,9 @@ def get_traffic_data():
             ELSE '55+'
           END AS age_group,
           ROUND(SUM(oi.sale_price), 2) AS total_revenue
-        FROM `comm034coursework-6875078.thelook.users` u
-        JOIN `comm034coursework-6875078.thelook.orders` o ON u.id = o.user_id
-        JOIN `comm034coursework-6875078.thelook.order_items` oi ON o.order_id = oi.order_id
+        FROM `comm034-coursework-6897699.thelook.users` u
+        JOIN `comm034-coursework-6897699.thelook.orders` o ON u.id = o.user_id
+        JOIN `comm034-coursework-6897699.thelook.order_items` oi ON o.order_id = oi.order_id
         WHERE o.status = 'Complete'
         GROUP BY traffic_source, age_group
         ORDER BY total_revenue DESC
@@ -79,8 +79,8 @@ def get_revenue_data():
         SELECT
           DATE(o.created_at) AS date,
           ROUND(SUM(oi.sale_price), 2) AS daily_revenue
-        FROM `comm034coursework-6875078.thelook.orders` o
-        JOIN `comm034coursework-6875078.thelook.order_items` oi ON o.order_id = oi.order_id
+        FROM `comm034-coursework-6897699.thelook.orders` o
+        JOIN `comm034-coursework-6897699.thelook.order_items` oi ON o.order_id = oi.order_id
         WHERE o.status = 'Complete' AND o.created_at >= '{thirty_days_ago}'
         GROUP BY date
         ORDER BY date
